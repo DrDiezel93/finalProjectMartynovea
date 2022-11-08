@@ -6,17 +6,25 @@
 ### ["1234", "1567", "-2"] -> ["-2"]
 ### ["Russia", "Denmark", "Kazan"] -> [ ]
 ___
-### 1. Метод `PrintArrayString`, позволяет выводить на экран элементы строкового массива (любой размерности), как указано в задаче
+### 1. Метод `PrintArrayString`, позволяет выводить на экран элементы строкового массива (любой размерности), как указано в примере к задаче
 ```
 void PrintArrayString (string [] arrStr)
 {
-    Console.Write ("[");
-    for (int i = 0; i < arrStr.Length-1; i++)
+    if (arrStr.Length > 0)
     {
-        Console.Write ($"\"{arrStr[i]}\", ");
+        Console.Write("[");
+        for (int i = 0; i < arrStr.Length - 1; i++)
+        {
+            Console.Write($"\"{arrStr[i]}\", ");
+        }
+        Console.Write($"\"{arrStr[arrStr.Length - 1]}\"");
+        Console.Write("]");
     }
-    Console.Write ($"\"{arrStr[arrStr.Length-1]}\"");
-    Console.Write ("]");
+    else
+    {
+        arrStr = new string[] { "" };
+        Console.Write($"[{arrStr[arrStr.Length - 1]}]");
+    }
 }
 ```
 ### 2. Предоставляем пользователю возможность ввести размерность массива, состоящего из слов/строк:
@@ -37,13 +45,9 @@ ___
 ```
 string[] sortArrStr = Array.FindAll(arrayString, str => str.Length <= 3);
 ```
-### Если таких элементов больше 0, выводим на экран полученный массив методом `PrintArrayString`:
+### Выводим на экран полученный массив методом `PrintArrayString`:
 ```
-if (sortArrStr.Length > 0) PrintArrayString (sortArrStr);
-```
-## иначе на экране появится `[]`
-```
-else Console.Write ("[]");
+PrintArrayString (sortArrStr);
 ```
 ## РЕАЛИЗАЦИЯ  ВТОРОГО СПОСОБА РЕШЕНИЯ ЗАДАЧИ
 ### 1. Методом `SizeSortedArrayString` определяем размер нового массива строк, элементы которого удовлетворяют условию задачи
@@ -79,15 +83,7 @@ string [] SortedArrayString (string [] arrayString, int count)
     return sortedArray;
 }
 ``` 
-### Если размер нового массива больше 0, выводим на экран полученный массив методом `PrintArrayString`:
+### Выводим на экран полученный массив методом `PrintArrayString`:
 ```
-if (count > 0) 
-{
-    string [] sortArr = SortedArrayString (arrayString, count);
     PrintArrayString (sortArr);
-}
-```
-## иначе на экране появится `[]`
-```
-else Console.Write ("[]");
 ```
